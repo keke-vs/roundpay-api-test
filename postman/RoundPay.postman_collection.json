@@ -1,0 +1,78 @@
+{
+  "info": {
+    "name": "RoundPay API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Login Success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"alice\",\"password\":\"123456\"}"
+        }
+      }
+    },
+    {
+      "name": "Transfer Success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/transfer",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"toAccount\":\"62220002\",\"amount\":88.66,\"requestId\":\"REQ-POSTMAN-001\"}"
+        }
+      }
+    },
+    {
+      "name": "Buy Fund",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/fund/buy",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fundId\":\"FUND001\",\"amount\":100}"
+        }
+      }
+    }
+  ]
+}
+
