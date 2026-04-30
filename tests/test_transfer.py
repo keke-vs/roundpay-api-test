@@ -75,3 +75,18 @@ def test_transfer_without_token(base_url):
     assert response.status_code == 401
     assert response.json()["message"] == "unauthorized"
 
+
+def test_transfer_insufficient_balance(base_url, auth_headers):
+    response = requests.post(
+        f"{base_url}/api/transfer",
+        json={
+            "toAccount": "62220002",
+            "amount": 999999.00,
+            "requestId": f"REQ-{uuid.uuid4()}",
+        },
+        headers=auth_headers,
+        timeout=3,
+    )
+
+    assert response.status_code == 400
+    assert response.json()["message"] == "insufficient balance"

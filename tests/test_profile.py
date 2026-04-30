@@ -27,3 +27,13 @@ def test_update_profile_mobile_format(base_url, auth_headers, mobile):
     assert response.status_code == 400
     assert response.json()["message"] == "mobile format is invalid"
 
+
+def test_update_profile_without_token(base_url):
+    response = requests.patch(
+        f"{base_url}/api/profile",
+        json={"nickname": "Alice", "mobile": "13900000001"},
+        timeout=3,
+    )
+
+    assert response.status_code == 401
+    assert response.json()["message"] == "unauthorized"

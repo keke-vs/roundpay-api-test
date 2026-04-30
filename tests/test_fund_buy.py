@@ -47,3 +47,14 @@ def test_buy_closed_fund_failed(base_url, auth_headers):
     assert response.status_code == 400
     assert response.json()["message"] == "fund is not available"
 
+
+def test_buy_not_exist_fund_failed(base_url, auth_headers):
+    response = requests.post(
+        f"{base_url}/api/fund/buy",
+        json={"fundId": "FUND999", "amount": 100.00},
+        headers=auth_headers,
+        timeout=3,
+    )
+
+    assert response.status_code == 400
+    assert response.json()["message"] == "fund does not exist"
