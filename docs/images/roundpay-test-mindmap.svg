@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="780" viewBox="0 0 1380 780">
+  <rect width="100%" height="100%" fill="#f7f9fc"/>
+  <style>
+    text { font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #172033; }
+    .root { font-size: 30px; font-weight: 800; fill: #fff; }
+    .module { font-size: 20px; font-weight: 800; fill: #fff; }
+    .leaf { font-size: 15px; fill: #344054; }
+    .line { stroke: #98a2b3; stroke-width: 2; fill: none; }
+  </style>
+  <rect x="545" y="345" rx="12" width="290" height="90" fill="#176b87"/>
+  <text class="root" x="690" y="400" text-anchor="middle">???????</text>
+  <path class="line" d="M 545 390 C 468 390, 468 135, 390 135"/>
+  <rect x="170" y="110" rx="10" width="220" height="50" fill="#176b87"/>
+  <text class="module" x="280.0" y="142" text-anchor="middle">??</text>
+  <path class="line" d="M 170 135 C 154 135, 154 109, 138 109"/>
+  <rect x="-7" y="92" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="114" text-anchor="middle">????</text>
+  <path class="line" d="M 170 135 C 154 135, 154 145, 138 145"/>
+  <rect x="-7" y="128" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="150" text-anchor="middle">????</text>
+  <path class="line" d="M 170 135 C 154 135, 154 181, 138 181"/>
+  <rect x="-7" y="164" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="186" text-anchor="middle">????</text>
+  <path class="line" d="M 170 135 C 154 135, 154 217, 138 217"/>
+  <rect x="-7" y="200" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="222" text-anchor="middle">Token ??</text>
+  <path class="line" d="M 545 390 C 468 390, 468 220, 390 220"/>
+  <rect x="170" y="195" rx="10" width="220" height="50" fill="#147a4d"/>
+  <text class="module" x="280.0" y="227" text-anchor="middle">????</text>
+  <path class="line" d="M 170 220 C 154 220, 154 194, 138 194"/>
+  <rect x="-7" y="177" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="199" text-anchor="middle">?????</text>
+  <path class="line" d="M 170 220 C 154 220, 154 230, 138 230"/>
+  <rect x="-7" y="213" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="235" text-anchor="middle">?????</text>
+  <path class="line" d="M 170 220 C 154 220, 154 266, 138 266"/>
+  <rect x="-7" y="249" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="271" text-anchor="middle">????</text>
+  <path class="line" d="M 545 390 C 468 390, 468 305, 390 305"/>
+  <rect x="170" y="280" rx="10" width="220" height="50" fill="#6b5dd3"/>
+  <text class="module" x="280.0" y="312" text-anchor="middle">????</text>
+  <path class="line" d="M 170 305 C 154 305, 154 279, 138 279"/>
+  <rect x="-7" y="262" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="284" text-anchor="middle">????</text>
+  <path class="line" d="M 170 305 C 154 305, 154 315, 138 315"/>
+  <rect x="-7" y="298" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="320" text-anchor="middle">????</text>
+  <path class="line" d="M 170 305 C 154 305, 154 351, 138 351"/>
+  <rect x="-7" y="334" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="356" text-anchor="middle">?????</text>
+  <path class="line" d="M 545 390 C 468 390, 468 390, 390 390"/>
+  <rect x="170" y="365" rx="10" width="220" height="50" fill="#b54708"/>
+  <text class="module" x="280.0" y="397" text-anchor="middle">??</text>
+  <path class="line" d="M 170 390 C 154 390, 154 364, 138 364"/>
+  <rect x="-7" y="347" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="369" text-anchor="middle">????</text>
+  <path class="line" d="M 170 390 C 154 390, 154 400, 138 400"/>
+  <rect x="-7" y="383" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="405" text-anchor="middle">????</text>
+  <path class="line" d="M 170 390 C 154 390, 154 436, 138 436"/>
+  <rect x="-7" y="419" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="441" text-anchor="middle">????</text>
+  <path class="line" d="M 170 390 C 154 390, 154 472, 138 472"/>
+  <rect x="-7" y="455" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="65.5" y="477" text-anchor="middle">????</text>
+  <path class="line" d="M 835 390 C 922 390, 922 475, 1010 475"/>
+  <rect x="1010" y="450" rx="10" width="220" height="50" fill="#c11574"/>
+  <text class="module" x="1120.0" y="482" text-anchor="middle">????</text>
+  <path class="line" d="M 1230 475 C 1246 475, 1246 449, 1262 449"/>
+  <rect x="1262" y="432" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="454" text-anchor="middle">????</text>
+  <path class="line" d="M 1230 475 C 1246 475, 1246 485, 1262 485"/>
+  <rect x="1262" y="468" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="490" text-anchor="middle">?????</text>
+  <path class="line" d="M 1230 475 C 1246 475, 1246 521, 1262 521"/>
+  <rect x="1262" y="504" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="526" text-anchor="middle">????</text>
+  <path class="line" d="M 835 390 C 922 390, 922 560, 1010 560"/>
+  <rect x="1010" y="535" rx="10" width="220" height="50" fill="#0b4a6f"/>
+  <text class="module" x="1120.0" y="567" text-anchor="middle">??</text>
+  <path class="line" d="M 1230 560 C 1246 560, 1246 534, 1262 534"/>
+  <rect x="1262" y="517" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="539" text-anchor="middle">????</text>
+  <path class="line" d="M 1230 560 C 1246 560, 1246 570, 1262 570"/>
+  <rect x="1262" y="553" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="575" text-anchor="middle">??????</text>
+  <path class="line" d="M 1230 560 C 1246 560, 1246 606, 1262 606"/>
+  <rect x="1262" y="589" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="611" text-anchor="middle">??????</text>
+  <path class="line" d="M 1230 560 C 1246 560, 1246 642, 1262 642"/>
+  <rect x="1262" y="625" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="647" text-anchor="middle">????</text>
+  <path class="line" d="M 835 390 C 922 390, 922 645, 1010 645"/>
+  <rect x="1010" y="620" rx="10" width="220" height="50" fill="#7a2e0e"/>
+  <text class="module" x="1120.0" y="652" text-anchor="middle">????</text>
+  <path class="line" d="M 1230 645 C 1246 645, 1246 619, 1262 619"/>
+  <rect x="1262" y="602" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="624" text-anchor="middle">????</text>
+  <path class="line" d="M 1230 645 C 1246 645, 1246 655, 1262 655"/>
+  <rect x="1262" y="638" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="660" text-anchor="middle">?????</text>
+  <path class="line" d="M 1230 645 C 1246 645, 1246 691, 1262 691"/>
+  <rect x="1262" y="674" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="696" text-anchor="middle">?????</text>
+  <path class="line" d="M 1230 645 C 1246 645, 1246 727, 1262 727"/>
+  <rect x="1262" y="710" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="732" text-anchor="middle">?????</text>
+  <path class="line" d="M 835 390 C 922 390, 922 730, 1010 730"/>
+  <rect x="1010" y="705" rx="10" width="220" height="50" fill="#344054"/>
+  <text class="module" x="1120.0" y="737" text-anchor="middle">?????</text>
+  <path class="line" d="M 1230 730 C 1246 730, 1246 704, 1262 704"/>
+  <rect x="1262" y="687" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="709" text-anchor="middle">pytest</text>
+  <path class="line" d="M 1230 730 C 1246 730, 1246 740, 1262 740"/>
+  <rect x="1262" y="723" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="745" text-anchor="middle">requests</text>
+  <path class="line" d="M 1230 730 C 1246 730, 1246 776, 1262 776"/>
+  <rect x="1262" y="759" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="781" text-anchor="middle">jsonschema</text>
+  <path class="line" d="M 1230 730 C 1246 730, 1246 812, 1262 812"/>
+  <rect x="1262" y="795" rx="8" width="145" height="34" fill="#ffffff" stroke="#d8e0eb"/>
+  <text class="leaf" x="1334.5" y="817" text-anchor="middle">29 passed</text>
+</svg>

@@ -1,6 +1,9 @@
 import json
 import re
+import sys
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 
@@ -27,6 +30,8 @@ class RoundPayState:
             "62220002": 1200.00,
         }
         self.transfer_requests = {}
+        self.transactions = []
+        self.transaction_sequence = 1000
         self.funds = {
             "FUND001": {"name": "稳健理财A", "status": "OPEN", "minAmount": 10.00},
             "FUND002": {"name": "指数增强B", "status": "CLOSED", "minAmount": 100.00},
@@ -38,8 +43,29 @@ class RoundPayState:
                 return username, user
         return None, None
 
+    def add_transaction(self, account, txn_type, amount, description, status="SUCCESS"):
+        self.transaction_sequence += 1
+        transaction = {
+            "transactionId": f"TXN{self.transaction_sequence}",
+            "account": account,
+            "type": txn_type,
+            "amount": amount,
+            "description": description,
+            "status": status,
+            "createdAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+        self.transactions.insert(0, transaction)
+        return transaction
+
 
 STATE = RoundPayState()
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
+STATIC_CONTENT_TYPES = {
+    ".css": "text/css; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".html": "text/html; charset=utf-8",
+}
 
 
 def make_response(code=0, message="success", data=None):
@@ -55,8 +81,20 @@ class RoundPayHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        if parsed.path == "/":
+            self.write_file(FRONTEND_DIR / "index.html")
+            return
+        if parsed.path.startswith("/static/"):
+            self.handle_static(parsed.path)
+            return
+        if parsed.path == "/api/account":
+            self.handle_account()
+            return
         if parsed.path == "/api/funds":
             self.handle_funds(parsed)
+            return
+        if parsed.path == "/api/transactions":
+            self.handle_transactions(parsed)
             return
         self.write_json(404, make_response(404, "not found"))
 
@@ -140,6 +178,18 @@ class RoundPayHandler(BaseHTTPRequestHandler):
             "fromBalance": STATE.balances[from_account],
             "toBalance": STATE.balances[to_account],
         }
+        result["transactionId"] = STATE.add_transaction(
+            from_account,
+            "TRANSFER_OUT",
+            -amount,
+            f"转账至 {to_account}",
+        )["transactionId"]
+        STATE.add_transaction(
+            to_account,
+            "TRANSFER_IN",
+            amount,
+            f"收到 {from_account} 转账",
+        )
         STATE.transfer_requests[request_id] = result
         self.write_json(200, make_response(data=result))
 
@@ -162,6 +212,38 @@ class RoundPayHandler(BaseHTTPRequestHandler):
             "username": username,
             "nickname": user["nickname"],
             "mobile": user["mobile"],
+        }))
+
+    def handle_account(self):
+        username, user = self.current_user()
+        if not user:
+            return
+
+        account = user["account"]
+        self.write_json(200, make_response(data={
+            "username": username,
+            "account": account,
+            "nickname": user["nickname"],
+            "mobile": user["mobile"],
+            "balance": STATE.balances[account],
+        }))
+
+    def handle_transactions(self, parsed):
+        username, user = self.current_user()
+        if not user:
+            return
+
+        query = parse_qs(parsed.query)
+        limit = int(query.get("limit", ["20"])[0])
+        account = user["account"]
+        items = [
+            transaction
+            for transaction in STATE.transactions
+            if transaction["account"] == account
+        ][:limit]
+        self.write_json(200, make_response(data={
+            "total": len(items),
+            "items": items,
         }))
 
     def handle_funds(self, parsed):
@@ -207,8 +289,14 @@ class RoundPayHandler(BaseHTTPRequestHandler):
             return
 
         STATE.balances[account] = round(STATE.balances[account] - amount, 2)
+        transaction = STATE.add_transaction(
+            account,
+            "FUND_BUY",
+            -amount,
+            f"购买 {fund_id} {fund['name']}",
+        )
         self.write_json(200, make_response(data={
-            "tradeId": f"T{account}{int(amount * 100)}",
+            "tradeId": transaction["transactionId"],
             "fundId": fund_id,
             "amount": amount,
             "balance": STATE.balances[account],
@@ -239,16 +327,46 @@ class RoundPayHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
+    def handle_static(self, path):
+        relative_path = path.removeprefix("/static/").strip("/")
+        if not relative_path:
+            self.write_json(404, make_response(404, "not found"))
+            return
+
+        target = (FRONTEND_DIR / relative_path).resolve()
+        if FRONTEND_DIR.resolve() not in target.parents:
+            self.write_json(403, make_response(403, "forbidden"))
+            return
+        self.write_file(target)
+
+    def write_file(self, path):
+        if not path.exists() or not path.is_file():
+            self.write_json(404, make_response(404, "not found"))
+            return
+
+        content = path.read_bytes()
+        content_type = STATIC_CONTENT_TYPES.get(path.suffix, "application/octet-stream")
+        self.send_response(200)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(content)))
+        self.end_headers()
+        self.wfile.write(content)
+
     def log_message(self, format, *args):
         return
 
 
 def create_server(host="127.0.0.1", port=8000):
+    global STATE
+    STATE = RoundPayState()
     return ThreadingHTTPServer((host, port), RoundPayHandler)
 
 
 if __name__ == "__main__":
     server = create_server()
-    print("RoundPay mock server running at http://127.0.0.1:8000")
+    try:
+        if sys.stdout:
+            print("RoundPay mock server running at http://127.0.0.1:8000")
+    except OSError:
+        pass
     server.serve_forever()
-

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>圆小付</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <main id="auth-screen" class="auth-screen">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="brand-block">
+        <p class="eyebrow">RoundPay</p>
+        <h1 id="auth-title">圆小付</h1>
+        <p class="subtle">个人支付业务演示系统</p>
+      </div>
+      <form id="login-form" class="login-form">
+        <label>
+          用户名
+          <input name="username" value="alice" autocomplete="username" required>
+        </label>
+        <label>
+          密码
+          <input name="password" value="123456" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">登录</button>
+      </form>
+      <div class="demo-users">
+        <span>测试账号</span>
+        <strong>alice / 123456</strong>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-screen" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="app-brand">
+        <span class="brand-mark">圆</span>
+        <div>
+          <strong>圆小付</strong>
+          <span>支付工作台</span>
+        </div>
+      </div>
+      <nav class="side-nav" aria-label="业务导航">
+        <button class="nav-item active" type="button" data-view="dashboard">首页</button>
+        <button class="nav-item" type="button" data-view="transfer">转账</button>
+        <button class="nav-item" type="button" data-view="funds">基金</button>
+        <button class="nav-item" type="button" data-view="profile">资料</button>
+        <button class="nav-item" type="button" data-view="transactions">流水</button>
+      </nav>
+      <button id="logout-button" class="logout-button" type="button">退出登录</button>
+    </aside>
+
+    <main class="content">
+      <header class="content-head">
+        <div>
+          <p class="eyebrow">Account</p>
+          <h1 id="page-title">首页</h1>
+        </div>
+        <div class="user-chip">
+          <span id="session-state">已登录</span>
+          <strong id="user-name">-</strong>
+        </div>
+      </header>
+
+      <section class="summary-grid" aria-label="账户概览">
+        <article class="metric balance">
+          <span>可用余额</span>
+          <strong id="balance-value">-</strong>
+        </article>
+        <article class="metric">
+          <span>付款账号</span>
+          <strong id="account-value">-</strong>
+        </article>
+        <article class="metric">
+          <span>手机号</span>
+          <strong id="mobile-value">-</strong>
+        </article>
+        <article class="metric">
+          <span>最近交易</span>
+          <strong id="transaction-count">0</strong>
+        </article>
+      </section>
+
+      <section id="dashboard" class="view active">
+        <div class="dashboard-grid">
+          <article class="panel">
+            <div class="section-head">
+              <h2>快捷转账</h2>
+              <span class="endpoint">POST /api/transfer</span>
+            </div>
+            <form id="quick-transfer-form" class="form-grid">
+              <label>
+                收款账号
+                <input name="toAccount" value="62220002" required>
+              </label>
+              <label>
+                金额
+                <input name="amount" type="number" min="0.01" step="0.01" value="20.00" required>
+              </label>
+              <button type="submit">转账</button>
+            </form>
+          </article>
+
+          <article class="panel">
+            <div class="section-head">
+              <h2>最新流水</h2>
+              <button class="link-button" type="button" data-view-target="transactions">查看全部</button>
+            </div>
+            <div id="recent-transactions" class="mini-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="transfer" class="view">
+        <article class="panel">
+          <div class="section-head">
+            <h2>账户转账</h2>
+            <span class="endpoint">POST /api/transfer</span>
+          </div>
+          <form id="transfer-form" class="form-grid wide">
+            <label>
+              收款账号
+              <input name="toAccount" value="62220002" required>
+            </label>
+            <label>
+              金额
+              <input name="amount" type="number" min="0.01" step="0.01" value="88.66" required>
+            </label>
+            <label>
+              请求号
+              <input name="requestId" id="request-id" required>
+            </label>
+            <button type="submit">提交转账</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="funds" class="view">
+        <article class="panel">
+          <div class="section-head">
+            <h2>基金产品</h2>
+            <span class="endpoint">GET /api/funds</span>
+          </div>
+          <div id="fund-list" class="fund-list" aria-live="polite"></div>
+          <form id="fund-buy-form" class="form-grid wide buy-form">
+            <label>
+              基金编号
+              <input name="fundId" value="FUND001" required>
+            </label>
+            <label>
+              购买金额
+              <input name="amount" type="number" min="0.01" step="0.01" value="100.00" required>
+            </label>
+            <button type="submit">确认购买</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="profile" class="view">
+        <article class="panel">
+          <div class="section-head">
+            <h2>个人资料</h2>
+            <span class="endpoint">PATCH /api/profile</span>
+          </div>
+          <form id="profile-form" class="form-grid wide">
+            <label>
+              昵称
+              <input name="nickname" required>
+            </label>
+            <label>
+              手机号
+              <input name="mobile" required>
+            </label>
+            <button type="submit">保存</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="transactions" class="view">
+        <article class="panel">
+          <div class="section-head">
+            <h2>交易流水</h2>
+            <span class="endpoint">GET /api/transactions</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>时间</th>
+                  <th>类型</th>
+                  <th>说明</th>
+                  <th>金额</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody id="transaction-table"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
